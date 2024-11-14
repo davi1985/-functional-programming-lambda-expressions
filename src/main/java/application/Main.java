@@ -1,9 +1,9 @@
 package application;
 
-import entities.MyComparator;
 import entities.Product;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -14,7 +14,14 @@ public class Main {
         list.add(new Product("Notebook", 1200.0));
         list.add(new Product("Tablet", 450.0));
 
-        list.sort(new MyComparator());
+        Comparator<Product> comparator = new Comparator<Product>() {
+            @Override
+            public int compare(Product p1, Product p2) {
+                return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+            }
+        };
+
+        list.sort(comparator);
 
         for (Product p : list) {
             System.out.println(p);
